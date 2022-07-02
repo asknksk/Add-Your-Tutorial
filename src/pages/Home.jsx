@@ -6,10 +6,10 @@ import { useState, useEffect } from "react";
 const Home = () => {
   const [tutorials, setTutorials] = useState();
 
-  const url = " https://tutorials-api-cw.herokuapp.com/api/tutorials";
+  const url = "https://axios-example-cw.herokuapp.com/api/tutorials";
 
+  //! GET (Read)
   const getTutorials = async () => {
-    // GET
     try {
       const { data } = await axios.get(url);
       setTutorials(data);
@@ -18,19 +18,26 @@ const Home = () => {
     }
   };
 
-  //! Sadece Component mount oldugunda istek yapar
+  //? Sadece Component mount oldugunda istek yapar
   useEffect(() => {
     getTutorials();
   }, []);
 
-  // POST (Create)
-  const addTutorial = (tutorial) => {
-    console.log("add");
+  console.log(tutorials);
+
+  //! POST (Create)
+  const addTutorial = async (tutorial) => {
+    try {
+      await axios.post(url, tutorial);
+    } catch (error) {
+      console.log(error);
+    }
+    getTutorials();
   };
 
   return (
     <>
-      <AddTutorial AddTutorial={addTutorial} />
+      <AddTutorial addTutorial={addTutorial} />
       <TutorialList tutorials={tutorials} />
     </>
   );
