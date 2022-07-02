@@ -23,8 +23,6 @@ const Home = () => {
     getTutorials();
   }, []);
 
-  console.log(tutorials);
-
   //! POST (Create)
   const addTutorial = async (tutorial) => {
     try {
@@ -35,10 +33,38 @@ const Home = () => {
     getTutorials();
   };
 
+  //delete
+  const deleteTutorial = async (id) => {
+    try {
+      await axios.delete(`${url}/${id}`);
+    } catch (error) {
+      console.log(error);
+    }
+    getTutorials();
+  };
+
+  //Update (PUT:Whole Update, PATCH: Partially Update)
+  const editTutorial = async (id, title, desc) => {
+    const filtered = tutorials
+      .filter((tutor) => tutor.id === id)
+      .map(() => ({ title: title, description: desc }));
+    console.log(filtered);
+    //   try {
+    //     await axios.put(`${url}/${id}`);
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
+    //   getTutorials();
+  };
+
   return (
     <>
       <AddTutorial addTutorial={addTutorial} />
-      <TutorialList tutorials={tutorials} />
+      <TutorialList
+        tutorials={tutorials}
+        deleteTutorial={deleteTutorial}
+        editTutorial={editTutorial}
+      />
     </>
   );
 };

@@ -1,7 +1,7 @@
 import { FaEdit } from "react-icons/fa";
 import { AiFillDelete } from "react-icons/ai";
 
-const TutorialList = ({ tutorials }) => {
+const TutorialList = ({ tutorials, deleteTutorial, editTutorial }) => {
   console.log(tutorials);
   //? Test data
 
@@ -26,9 +26,19 @@ const TutorialList = ({ tutorials }) => {
                 <th>{id}</th>
                 <td>{title}</td>
                 <td>{description}</td>
-                <td className="text-center">
-                  <FaEdit size={20} className="me-3 text-warning " />
-                  <AiFillDelete size={22} className="text-danger" />
+                <td className="text-center cursor-pointer">
+                  <FaEdit
+                    size={20}
+                    className="me-3 text-warning "
+                    onDoubleClick={() =>
+                      editTutorial(id, "title", "description")
+                    }
+                  />
+                  <AiFillDelete
+                    size={22}
+                    className="text-danger cursor-pointer"
+                    onClick={() => deleteTutorial(id)}
+                  />
                 </td>
               </tr>
             );
