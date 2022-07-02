@@ -1,28 +1,36 @@
-import axios from "axios";
 import AddTutorial from "../components/AddTutorial";
 import TutorialList from "../components/TutorialList";
+import axios from "axios";
 import { useState, useEffect } from "react";
 
 const Home = () => {
   const [tutorials, setTutorials] = useState();
 
-  const url = "https://axios-example-cw.herokuapp.com/api/tutorials";
+  const url = " https://tutorials-api-cw.herokuapp.com/api/tutorials";
 
   const getTutorials = async () => {
-    const { data } = await axios.get(url);
-    console.log(data);
+    // GET
+    try {
+      const { data } = await axios.get(url);
+      setTutorials(data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  // Sadece Component mount oldugunda istek yapar
+  //! Sadece Component mount oldugunda istek yapar
   useEffect(() => {
     getTutorials();
   }, []);
 
-  console.log(tutorials);
+  // POST (Create)
+  const addTutorial = (tutorial) => {
+    console.log("add");
+  };
 
   return (
     <>
-      <AddTutorial />
+      <AddTutorial AddTutorial={addTutorial} />
       <TutorialList tutorials={tutorials} />
     </>
   );
