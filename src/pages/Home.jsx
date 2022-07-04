@@ -43,18 +43,19 @@ const Home = () => {
     getTutorials();
   };
 
-  //Update (PUT:Whole Update, PATCH: Partially Update)
+  //! Update (PUT:Whole Update,PATCH :Partially Update)
   const editTutorial = async (id, title, desc) => {
     const filtered = tutorials
       .filter((tutor) => tutor.id === id)
       .map(() => ({ title: title, description: desc }));
+
     console.log(filtered);
-    //   try {
-    //     await axios.put(`${url}/${id}`);
-    //   } catch (error) {
-    //     console.log(error);
-    //   }
-    //   getTutorials();
+    try {
+      await axios.put(`${url}/${id}`, filtered[0]);
+    } catch (error) {
+      console.log(error);
+    }
+    getTutorials();
   };
 
   return (
