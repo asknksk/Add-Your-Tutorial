@@ -44,7 +44,7 @@ const TutorialList = ({ tutorials, deleteTutorial, editTutorial }) => {
         </tbody>
       </table>
 
-      <EditTutorial />
+      <EditTutorial editTutorial={editTutorial} />
     </div>
   );
 };
