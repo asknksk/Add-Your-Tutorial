@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const EditTutorial = ({ editTutorial }) => {
+const EditTutorial = ({ editTutorial, editedItem }) => {
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
 
