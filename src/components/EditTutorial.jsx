@@ -1,15 +1,35 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const EditTutorial = ({ editTutorial, editedItem }) => {
-  const [title, setTitle] = useState("");
-  const [desc, setDesc] = useState("");
+  const { id, title: newTitle, description } = editedItem;
 
-  const handleSubmit = (e) => {
+  const [title, setTitle] = useState(newTitle);
+  const [desc, setDesc] = useState(description);
+
+  //? https://reactjs.org/docs/hooks-reference.html#usestate
+  //! State degiskeninin degeri, 1.render ile initialState
+  //! parametresinin ilk degerini alir. Dolayisiyle bu durumda
+  //! prop'tan gelen ilk deger state'e aktarilir.
+  //! Sonradan degisen props degerleri useState'e aktarilmaz.
+  //! Eger props'tan gelen degerleri her degisimde useState'e
+  //! aktarmak istersek useEffect hook'unu componentDidUpdate
+  //! gibi kullanabiriz.
+
+  // componentDisUpdate olarak kullandık
+  // newTitle veya description her değiştiğinde Local title ve desc state'lerimizi
+  //güncelliyoruz.
+  useEffect(() => {
+    setTitle(newTitle);
+    setDesc(description);
+  }, [newTitle, description]);
+
+  const handleSave = (e) => {
     e.preventDefault();
-    editTutorial({ title: title, description: desc });
+    editTutorial(id, title, desc);
     setTitle("");
     setDesc("");
   };
+
   return (
     <div className="modal" tabIndex="-1" id="edit-modal">
       <div className="modal-dialog">
@@ -55,9 +75,10 @@ const EditTutorial = ({ editTutorial, editedItem }) => {
           </div>
           <div className="modal-footer">
             <button
-              data-bs-dismiss="modal"
               type="button"
               className="btn btn-primary"
+              onClick={handleSave}
+              data-bs-dismiss="modal"
             >
               Save
             </button>
