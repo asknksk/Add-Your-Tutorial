@@ -53,7 +53,7 @@ const EditTutorial = ({ editTutorial, editedItem }) => {
                 className="form-control"
                 id="title"
                 placeholder="Enter your title"
-                value={title}
+                value={title || ""}
                 onChange={(e) => setTitle(e.target.value)}
                 required
               />
@@ -67,7 +67,7 @@ const EditTutorial = ({ editTutorial, editedItem }) => {
                 className="form-control"
                 id="desc"
                 placeholder="Enter your Description"
-                value={desc}
+                value={desc || ""}
                 onChange={(e) => setDesc(e.target.value)}
                 required
               />
