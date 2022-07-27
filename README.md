@@ -14,7 +14,7 @@
 <hr>
 
 ## Project Preview 
-![Alt Text]()
+![Alt Text](https://github.com/asknksk/Add-Your-Tutorial/blob/master/src/assets/Preview.gif)
 
 <hr> 
 
